@@ -59,12 +59,10 @@ async function render()
 
 	let content = ``;
 
-	var userRequest = await fetch ('https://reqres.in/api/users')
+	let users = await fetch ('https://reqres.in/api/users')
 		.then(response => response.json() )
 		.then(page => page.data )
 		.then(users => { return users; });
-
-	let users = userRequest;
 
 	for ( let user of users )
 	{
