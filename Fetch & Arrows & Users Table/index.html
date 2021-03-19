@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<table border="2" > 
+<table> 
 
 	<caption>Users</caption>
 
@@ -52,7 +52,6 @@
 <script type="text/javascript">
 
 var table_body = document.getElementById('users_table_body');
-var userCount = document.querySelector('#userCount');
 
 async function render()
 {
@@ -79,7 +78,7 @@ async function render()
 		`;
 	}
 
-	userCount.innerHTML = `${users.length}`;
+	document.querySelector('#userCount').innerHTML = `${users.length}`;
 }
 
 render();
