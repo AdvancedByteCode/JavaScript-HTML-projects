@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cím</title>
+	<meta charset="UTF-8">
+
+	<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+	</style>
+
+</head>
+<body>
+
+<table border="2" > 
+
+	<caption>Users</caption>
+
+	<thead>
+		<th>ID</th>
+		<th>Avatar</th>
+		<th>Email</th>
+		<th>FirstName</th>
+		<th>LastName</th>
+	</thead>
+	<tbody id="users_table_body" >
+		
+	</tbody>
+
+	<tfoot>
+		<tr>
+			<td colspan="4" >User Count</td>
+			<td id="userCount" ></td>
+		</tr>
+	</tfoot>
+
+</table>
+
+
+<script type="text/javascript">
+
+var table_body = document.getElementById('users_table_body');
+var userCount = document.querySelector('#userCount');
+
+async function render()
+{
+
+	let content = ``;
+
+	var userRequest = await fetch ('https://reqres.in/api/users')
+		.then(response => response.json() )
+		.then(page => page.data )
+		.then(users => { return users; });
+
+	let users = userRequest;
+
+	for ( let user of users )
+	{
+
+		table_body.innerHTML += `
+
+			<tr>
+				<td>${user.id}</td>
+				<td><img scr="${user.avatar}" alt="userAvatar" title="userAvatar"></td>
+				<td>${user.email}</td>
+				<td>${user.first_name}</td>
+				<td>${user.last_name}</td>
+			</tr>
+
+		`;
+	}
+
+	userCount.innerHTML = `${users.length}`;
+}
+
+render();
+
+</script>
+
+</body>
+</html>
